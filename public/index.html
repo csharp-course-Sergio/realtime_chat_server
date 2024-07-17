@@ -16,10 +16,12 @@
         var socket = io();
 
         socket.on('connect', function () {
+            console.clear();
             console.log('Conectado al servidor')
         });
 
         socket.on('disconnect', function () {
+            console.clear();
             console.log('Perdimos comunicación con el servidor');
         });
 
