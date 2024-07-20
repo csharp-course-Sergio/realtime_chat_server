@@ -18,6 +18,18 @@ const generateJWT = (uid) => {
   });
 };
 
+const checkJWT = (authHeader = "") => {
+  try {
+    const token = authHeader.split(" ")[1];
+    const { uid } = jwt.verify(token, process.env.JWT_SECRET);
+
+    return [true, uid];
+  } catch (error) {
+    return [false, null];
+  }
+};
+
 module.exports = {
   generateJWT,
+  checkJWT,
 };
