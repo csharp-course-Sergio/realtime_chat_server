@@ -15,7 +15,7 @@ io.on("connection", (client) => {
   client.join(uid);
 
   client.on("private-msg", (payload) => {
-    console.log(payload);
+    io.to(payload.to).emit("private-msg", payload);
   });
 
   client.on("disconnect", () => {
