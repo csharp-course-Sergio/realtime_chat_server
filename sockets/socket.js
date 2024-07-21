@@ -12,6 +12,12 @@ io.on("connection", (client) => {
 
   connectedUser(uid);
 
+  client.join(uid);
+
+  client.on("private-msg", (payload) => {
+    console.log(payload);
+  });
+
   client.on("disconnect", () => {
     disconnectedUser(uid);
   });
