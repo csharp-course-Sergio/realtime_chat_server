@@ -1,6 +1,10 @@
 const { checkJWT } = require("../helpers/jwt");
 const { io } = require("../index");
-const { connectedUser, disconnectedUser } = require("../controllers/socket");
+const {
+  connectedUser,
+  disconnectedUser,
+  recordMessage,
+} = require("../controllers/socket");
 
 // Mensajes de Sockets
 io.on("connection", (client) => {
@@ -14,7 +18,8 @@ io.on("connection", (client) => {
 
   client.join(uid);
 
-  client.on("private-msg", (payload) => {
+  client.on("private-msg", async (payload) => {
+    await recordMessage(payload);
     io.to(payload.to).emit("private-msg", payload);
   });
 
